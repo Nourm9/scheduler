@@ -4,15 +4,23 @@ import "components/Appointments/styles.scss";
 import Show from "./Show";
 import Empty from "./Empty"
 import Create from "./Create";
+import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
   
-  const {  interview, time, interviewers, bookInterview } = props;
+  const {  id, interview, time, interviewers, bookInterview } = props;
+  console.log('props Appointment', props)
+
   
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
-  const CREATE = "CREATE"
+  const CREATE = "CREATE";
+  const SAVING = "SAVING";
+  const DELETE = "DELETING"
+  const CONFIRM = "CONFIRM";
+
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
   );
@@ -21,28 +29,48 @@ export default function Appointment(props) {
   }
 
   const onCancel = () => {
-    console.log("onCancel")
-    transition(EMPTY)
+    transition(DELETE)
   }  
+
+  const onConfirm = () => {
+    transition(CONFIRM);
+  }
 
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
-    console.log("interview",interview)
+    console.log("interview test", interview)
+    transition(SAVING);
+    bookInterview(id, interview)
+      .then(() => {
+      transition(EMPTY)
+    })
+    
+    // const doSomething = new Promise(function (resolve, reject) {
+    //   setTimeout(function () {
+    //     resolve(transition(SHOW));
+    //   }, 1000);
+    // });
+    
+    // return doSomething.then(transition(SAVING));
   }
-  return (<article className="appointment">
+  console.log("test", interview);
+  return (
+    <article className="appointment">
       <Header time={time} />
-      
-{mode === EMPTY && <Empty onAdd={onAdd} />}
-{mode === CREATE && <Create  interviewers={interviewers} onSave={save} onCancel={onCancel} bookInterview={save}  /> }
-{mode === SHOW && (
-  <Show
-    student={interview.student}
-    interviewer={interview.interviewer}
-  />
-)} 
- 
-  </article>);
+
+      {mode === EMPTY && <Empty onAdd={onAdd} />}
+      {mode === CREATE && (
+        <Create interviewers={interviewers} onSave={save} onCancel={onCancel} />
+      )}
+      {mode === SAVING && <Status message={"Saving"} />}
+      {mode === DELETE && <Status message={"Deleting"} />}
+      {mode === CONFIRM && <Confirm message={"Deleting"} onConfirm={onCancel} onCancel={()=>transition(SHOW)} />}
+      {mode === SHOW && (
+        <Show student={interview.student} interviewer={interview.interviewer} onDelete={onConfirm} />
+      )}
+    </article>
+  );
 }

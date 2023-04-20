@@ -1,5 +1,4 @@
 export function getAppointmentsForDay(state, day) {
-  console.log("state", state);
   if (state.days === []) {
     return [];
   }
@@ -11,7 +10,7 @@ export function getAppointmentsForDay(state, day) {
   }
   const objList = filteredNames[0];
   const arrayList = objList.appointments;
-  console.log("arraylist", arrayList)
+  
   return arrayList.map((id) => state.appointments[id]);
 }
 
@@ -33,20 +32,14 @@ export function getInterviewersForDay(state, day) {
 };
 
 
-export default function getInterview(state, interview) {
-  console.log(interview);
-  if (interview === null) {
+export function getInterview(state, interview) {
+  // console.log(interview);
+  if (!interview) {
     return null;
   }
 
-  const output = {
-    student: "adsf",
-    interviewer: {
-      id: 3,
-      name: "adfgg",
-      avatar: "124",
-    },
+  return {
+    ...interview,
+    interviewer: state.interviewers[interview.interviewer]
   };
-
-  return output;
 }
