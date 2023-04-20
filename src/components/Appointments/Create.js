@@ -39,7 +39,7 @@ export default function Create(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancelForm}>
+          <Button danger onClick={onCancel}>
             Cancel
           </Button>
           <Button confirm onClick={onSave}>

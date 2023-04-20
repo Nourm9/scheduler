@@ -5,13 +5,14 @@ import DayListItem from "./DayListItem";
 export default function DayList(props) {
   const { value, days, onChange } = props;
   console.log({ days })
+  console.log("daylist onchange", onChange)
   const listOfDays = days.map((dayItem) => 
         <DayListItem 
-        id={dayItem.id}
+        key={dayItem.id}
         name={dayItem.name} 
         spots={dayItem.spots} 
-        selected={dayItem.name === value}
-        setDay={onChange}  
+      selected={dayItem.name === value}
+      onChange={onChange}
       />
   )
   return (
