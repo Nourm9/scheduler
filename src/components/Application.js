@@ -34,6 +34,7 @@ export default function Application(props) {
       [id]: appointment,
     };
 
+   
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`,{interview})
       .then((response) => {
@@ -48,6 +49,30 @@ export default function Application(props) {
   };
   
 
+  const deleteInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((response) => {
+        setState({
+          ...state,
+          appointments,
+        });
+      })
+      .catch((error) => {
+        console.log("error", error);
+        throw error;
+      });
+  };
+
   const listOfAppointments = dailyAppointments.map((appointment) => {
     return (
       <Appointment
@@ -56,10 +81,14 @@ export default function Application(props) {
         interview={getInterview(state, appointment.interview)}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     );
   });
 
+
+
+  
   // CALL TO API USING useEFFECT
   useEffect(() => {
     Promise.all([
@@ -88,7 +117,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} onChange={setDay} />
+          <DayList days={state.days} day={state.day} onChange={setDay} value={state.day} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

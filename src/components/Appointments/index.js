@@ -10,16 +10,18 @@ import useVisualMode from "hooks/useVisualMode";
 
 export default function Appointment(props) {
   
-  const {  id, interview, time, interviewers, bookInterview } = props;
+  const {  id, interview, time, interviewers, bookInterview, deleteInterview } = props;
   console.log('props Appointment', props)
-
   
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
-  const DELETE = "DELETING"
+  const DELETE = "DELETE"
   const CONFIRM = "CONFIRM";
+  const EDIT = "EDIT";
+
+
 
   const { mode, transition, back } = useVisualMode(
     interview ? SHOW : EMPTY
@@ -28,12 +30,18 @@ export default function Appointment(props) {
     transition(CREATE);
   }
 
+ 
   const onCancel = () => {
-    transition(DELETE)
+    transition(DELETE);
+    deleteInterview(id).then(() => {transition(EMPTY)})
   }  
 
   const onConfirm = () => {
     transition(CONFIRM);
+  }
+
+  const onEdit = () => {
+    
   }
 
   const save = (name, interviewer) => {
@@ -45,7 +53,7 @@ export default function Appointment(props) {
     transition(SAVING);
     bookInterview(id, interview)
       .then(() => {
-      transition(EMPTY)
+      transition(SHOW)
     })
     
     // const doSomething = new Promise(function (resolve, reject) {
@@ -56,7 +64,6 @@ export default function Appointment(props) {
     
     // return doSomething.then(transition(SAVING));
   }
-  console.log("test", interview);
   return (
     <article className="appointment">
       <Header time={time} />
@@ -67,7 +74,7 @@ export default function Appointment(props) {
       )}
       {mode === SAVING && <Status message={"Saving"} />}
       {mode === DELETE && <Status message={"Deleting"} />}
-      {mode === CONFIRM && <Confirm message={"Deleting"} onConfirm={onCancel} onCancel={()=>transition(SHOW)} />}
+      {mode === CONFIRM && <Confirm message={"Are you sure you want to delete?"} onConfirm={onCancel} onCancel={()=>transition(SHOW)} />}
       {mode === SHOW && (
         <Show student={interview.student} interviewer={interview.interviewer} onDelete={onConfirm} />
       )}
