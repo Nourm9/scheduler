@@ -2,6 +2,7 @@ export function getAppointmentsForDay(state, day) {
   if (state.days === []) {
     return [];
   }
+
   const filteredNames = state.days.filter(
     (appointment) => appointment.name === day
   );
@@ -25,10 +26,12 @@ export function getInterviewersForDay(state, day) {
     return [];
   }
   const objList = filteredNames[0];
-  console.log("filternames",filteredNames)
+  
   const arrayList = objList.interviewers;
-  console.log("state test", state)
-  return arrayList.map((id) => state.interviewers[id-1]);
+
+  const mapping = arrayList.map((id) => state.interviewers[id]);
+  
+  return mapping
 };
 
 

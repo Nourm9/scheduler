@@ -19,9 +19,9 @@ export default function DayListItem(props) {
     return `no spots remaining`
   }
   
-  console.log("onchange", onChange)
+
   return (
-    <li onClick={()=> onChange(name)} className={dayClass}>
+    <li data-testid="day" onClick={() => onChange(name)} className={dayClass}>
       <h2 className="text--regular">{name}</h2>
       <h3 className="text--light">{formatSpots(spots)}</h3>
     </li>

@@ -3,15 +3,16 @@ import Header from "./Header";
 import "components/Appointments/styles.scss";
 import Show from "./Show";
 import Empty from "./Empty"
-import Create from "./Create";
+import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
-import useVisualMode from "hooks/useVisualMode";
+import Error from "./Error"
+import {useVisualMode} from "hooks/useVisualMode";
 
 export default function Appointment(props) {
   
-  const {  id, interview, time, interviewers, bookInterview, deleteInterview } = props;
-  console.log('props Appointment', props)
+  const {  id, interview, time, interviewers, bookInterview, cancelInterview,  } = props;
+
   
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
@@ -19,7 +20,9 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const DELETE = "DELETE"
   const CONFIRM = "CONFIRM";
-  const EDIT = "EDIT";
+  const EDIT = "EDIT"
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
 
 
 
@@ -31,30 +34,36 @@ export default function Appointment(props) {
   }
 
  
-  const onCancel = () => {
-    transition(DELETE);
-    deleteInterview(id).then(() => {transition(EMPTY)})
+  const onDelete = () => {
+    transition(DELETE, true)
+    cancelInterview(id)
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch((error) => transition(ERROR_DELETE), true);
   }  
 
   const onConfirm = () => {
     transition(CONFIRM);
   }
 
-  const onEdit = () => {
-    
-  }
+  const editAppointment = () => {
+    cancelInterview(id)
+      .then(() => {
+        transition(CREATE);
+      });
+  };
 
   const save = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer,
     };
-    console.log("interview test", interview)
+    console.log("interview save", interview)
     transition(SAVING);
     bookInterview(id, interview)
-      .then(() => {
-      transition(SHOW)
-    })
+  .then(() => transition(SHOW))
+    .catch(error => transition(ERROR_SAVE), true);;
     
     // const doSomething = new Promise(function (resolve, reject) {
     //   setTimeout(function () {
@@ -64,19 +73,60 @@ export default function Appointment(props) {
     
     // return doSomething.then(transition(SAVING));
   }
+  
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       <Header time={time} />
 
       {mode === EMPTY && <Empty onAdd={onAdd} />}
       {mode === CREATE && (
-        <Create interviewers={interviewers} onSave={save} onCancel={onCancel} />
+        <Form
+          interviewers={interviewers}
+          onSave={save}
+          onCancel={() => {
+            transition(EMPTY);
+          }}
+        />
       )}
       {mode === SAVING && <Status message={"Saving"} />}
       {mode === DELETE && <Status message={"Deleting"} />}
-      {mode === CONFIRM && <Confirm message={"Are you sure you want to delete?"} onConfirm={onCancel} onCancel={()=>transition(SHOW)} />}
+      {mode === ERROR_DELETE && (
+        <Error
+          message="Error: Could not delete appointment"
+          onClose={() => transition(SHOW)}
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="Error: Could not save appointment"
+          onClose={() => transition(SHOW)}
+        />
+      )}
+      {mode === CONFIRM && (
+        <Confirm
+          message={"Are you sure you want to delete?"}
+          onConfirm={onDelete}
+          onCancel={() => transition(SHOW)}
+        />
+      )}
+
+      {mode === EDIT && (
+        <Confirm
+          message={
+            "Are you sure you want to edit, the appointment will be deleted?"
+          }
+          onConfirm={editAppointment}
+          onCancel={() => transition(SHOW)}
+        />
+      )}
+
       {mode === SHOW && (
-        <Show student={interview.student} interviewer={interview.interviewer} onDelete={onConfirm} />
+        <Show
+          student={interview.student}
+          interviewer={interview.interviewer}
+          onDelete={onConfirm}
+          onEdit={() => transition(EDIT)}
+        />
       )}
     </article>
   );

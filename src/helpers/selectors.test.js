@@ -1,5 +1,4 @@
-import getInterview from "./selector.js"
-import { getInterviewersForDay } from "./selector.js";
+import { getInterviewersForDay, getAppointmentsForDay, getInterview } from "./selector.js";
 const state = {
   days: [
     {
