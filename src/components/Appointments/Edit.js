@@ -25,8 +25,8 @@ export default function Create(props) {
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
-            placeholder={student}
-            disabled
+            placeholder="Enter Student Name"
+
           />
         </form>
         <InterviewerList

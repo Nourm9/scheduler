@@ -85,7 +85,14 @@ export default {
   }),
 
   put: jest.fn((url) => {
-      /* Resolve interviewers data */
+    /* Resolve interviewers data */
+    return Promise.resolve({
+      status: 200,
+      statusText: "OK",
+    });
+  }),
+  delete: jest.fn((url) => {
+    /* Resolve interviewers data */
     return Promise.resolve({
       status: 200,
       statusText: "OK",

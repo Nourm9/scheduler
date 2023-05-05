@@ -17,7 +17,7 @@ export default function Show(props) {
       <img onClick={onEdit}
         className="appointment__actions-button"
         src="images/edit.png"
-        alt="Edit"
+            alt="Edit"
       />
       <img onClick={onDelete}
         className="appointment__actions-button"

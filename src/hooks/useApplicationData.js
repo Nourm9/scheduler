@@ -11,18 +11,16 @@ export function useApplicationData(initial) {
     appointments: {},
     interviewers: {},
   });
-// copy of days state... map through it
-// update spot 
-// 
-// 
+  // copy of days state... map through it
+  // update spot
+  //
+  //
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers"),
     ]).then((response) => {
-      console.log("response", response)
-      console.log("response[0]", response[0]);
       setState({
         ...state,
         days: response[0].data,
@@ -34,11 +32,11 @@ export function useApplicationData(initial) {
 
   const updateSpots = (state, days) => {
     const currentDay = days.find((day) => {
-      return day.name === state.day
-    })
+      return day.name === state.day;
+    });
     let spots = 0;
     for (const aptId of currentDay.appointments) {
-      if (!state.appointments[aptId].interview ) {
+      if (!state.appointments[aptId].interview) {
         spots++;
       }
     }
@@ -46,7 +44,7 @@ export function useApplicationData(initial) {
     const updatedDay = { ...currentDay, spots };
     copyOfDays[currentDay.id - 1] = updatedDay;
     return copyOfDays;
-  }
+  };
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -57,9 +55,6 @@ export function useApplicationData(initial) {
       ...state.appointments,
       [id]: appointment,
     };
-    
-
-  
 
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
@@ -68,11 +63,10 @@ export function useApplicationData(initial) {
         const days = updateSpots(newState, state.days);
         setState({
           ...newState,
-          days
+          days,
         });
       })
       .catch((error) => {
-        console.log("error", error);
         throw error;
       });
   }
@@ -86,8 +80,8 @@ export function useApplicationData(initial) {
       ...state.appointments,
       [id]: appointment,
     };
-    
-    // const days = updateSpots(state.days) 
+
+    // const days = updateSpots(state.days)
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then((response) => {
@@ -96,7 +90,7 @@ export function useApplicationData(initial) {
         setState({
           ...newState,
           // appointments,
-          days
+          days,
         });
       });
   }

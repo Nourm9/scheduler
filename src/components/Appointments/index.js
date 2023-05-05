@@ -111,13 +111,14 @@ export default function Appointment(props) {
       )}
 
       {mode === EDIT && (
-        <Confirm
-          message={
-            "Are you sure you want to edit, the appointment will be deleted?"
-          }
-          onConfirm={editAppointment}
-          onCancel={() => transition(SHOW)}
+        <Form
+          student={interview.student}
+          interviewer={interview.interviewer.id}
+          interviewers={interviewers}
+          onSave={save}
+          onCancel={back}
         />
+
       )}
 
       {mode === SHOW && (
