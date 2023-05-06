@@ -14,7 +14,23 @@ The front end of this project is built with React which also makes requests to a
 -Interviewr is not selected in form
 -HTTP response fails
 
+## Screenshots
 
+
+Main View Page
+!['Main View Page'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Main%20Page.gif)
+
+Saving Appointment
+!['Saving Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Saving.gif)
+
+Deleting Appointment
+!['Deleting Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Delete.gif)
+
+Form Errors
+!['Form Errors'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Form%20Errors.gif)
+
+HTTP/API Errors
+!['HTTP/API Errors'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20API%20Error.gif)
 
 ## Setup
 
@@ -40,9 +56,17 @@ npm run storybook
 
 ## Project Stack
 
-**Front-End:** React, JavaScript, Axios, JSX, HTML, SASS,
+**Front-End:** 
+-React
+-JavaScript
+-Axios
+-JSX
+-HTML and SASS,
 
-**Back-End:** Express, Node.js, PostgreSQL
+**Back-End:** 
+-Express 
+-Node.js
+-PostgreSQL
 
 **Testing:** Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
 
