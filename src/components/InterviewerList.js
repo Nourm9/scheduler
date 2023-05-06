@@ -1,8 +1,7 @@
 import React from "react";
 import InterviewerListItem from "./InterviewerListItem";
-import "components/InterviewerList.scss"
+import "components/InterviewerList.scss";
 import PropTypes from "prop-types";
-
 
 export default function InterviewerList(props) {
   const { interviewers, onChange, interviewer } = props;
@@ -21,7 +20,7 @@ export default function InterviewerList(props) {
     <section className="interviewers">
       <h4 className="interviewers__header text--light">Interviewers</h4>
       <ul className="interviewers__list">{listOfInterviewers}</ul>
-    </section>  
+    </section>
   );
 }
 

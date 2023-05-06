@@ -1,24 +1,23 @@
 import React from "react";
 import classNames from "classnames";
-import "components/DayListItem.scss"
+import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  const {  name, spots, onChange } = props;
+  const { name, spots, onChange } = props;
 
   const dayClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": props.spots === 0,
   });
-  const formatSpots = (value) => { 
-    if (value >1) {
-    return `${value} spots remaining`
-    };
-    if (value===1) {
-      return `1 spot remaining`
+  const formatSpots = (value) => {
+    if (value > 1) {
+      return `${value} spots remaining`;
     }
-    return `no spots remaining`
-  }
-  
+    if (value === 1) {
+      return `1 spot remaining`;
+    }
+    return `no spots remaining`;
+  };
 
   return (
     <li data-testid="day" onClick={() => onChange(name)} className={dayClass}>

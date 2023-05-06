@@ -1,7 +1,6 @@
 import DayList from "./DayList";
 import React, { useState, useEffect } from "react";
 
-
 import Appointment from "./Appointments/index";
 import "components/Application.scss";
 import {
@@ -11,16 +10,12 @@ import {
 } from "helpers/selector";
 import { useApplicationData } from "hooks/useApplicationData";
 
-
-
 export default function Application(props) {
-    const { state, setDay, bookInterview, cancelInterview } =
-      useApplicationData();
+  const { state, setDay, bookInterview, cancelInterview } =
+    useApplicationData();
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
   const dailyInterviewers = getInterviewersForDay(state, state.day);
-
-  
 
   const listOfAppointments = dailyAppointments.map((appointment) => {
     return (
@@ -31,19 +26,11 @@ export default function Application(props) {
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
-        
       />
     );
   });
 
 
-
-  
-  // CALL TO API USING useEFFECT
-
-
-
-  //XTML returned frontend code.
   return (
     <main className="layout">
       <section className="sidebar">
@@ -54,7 +41,12 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} onChange={setDay} value={state.day} />
+          <DayList
+            days={state.days}
+            day={state.day}
+            onChange={setDay}
+            value={state.day}
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -62,7 +54,9 @@ export default function Application(props) {
           alt="Lighthouse Labs"
         />
       </section>
-      <section className="schedule">{listOfAppointments} <Appointment key="last" time="5pm" />  </section>
+      <section className="schedule">
+        {listOfAppointments} <Appointment key="last" time="5pm" />{" "}
+      </section>
     </main>
   );
 }

@@ -11,10 +11,8 @@ export function useApplicationData(initial) {
     appointments: {},
     interviewers: {},
   });
-  // copy of days state... map through it
-  // update spot
-  //
-  //
+
+  // CALL TO API USING useEFFECT
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
@@ -30,6 +28,7 @@ export function useApplicationData(initial) {
     });
   }, []);
 
+  // Helper Func; will update spots remaining after booking/canceling interview
   const updateSpots = (state, days) => {
     const currentDay = days.find((day) => {
       return day.name === state.day;
@@ -81,7 +80,6 @@ export function useApplicationData(initial) {
       [id]: appointment,
     };
 
-    // const days = updateSpots(state.days)
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then((response) => {
@@ -89,7 +87,6 @@ export function useApplicationData(initial) {
         const days = updateSpots(newState, state.days);
         setState({
           ...newState,
-          // appointments,
           days,
         });
       });
