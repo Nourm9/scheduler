@@ -56,19 +56,23 @@ npm run storybook
 
 ## Project Stack
 
-**Front-End:** 
+### Front-End:
 -React
 -JavaScript
 -Axios
 -JSX
 -HTML and SASS,
 
-**Back-End:** 
+### Back-End: 
 -Express 
 -Node.js
 -PostgreSQL
 
-**Testing:** Storybook, Webpack Dev Server, Jest, Testing Library and Cypress
+### Testing: 
+-Storybook
+-Webpack Dev Server
+-Jest
+-Testing Library and Cypress
 
 ## Dependencies
 
