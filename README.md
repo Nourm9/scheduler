@@ -23,7 +23,7 @@ The front end of this project is built with React which also makes requests to a
 ### Saving Appointment
 !['Saving Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Saving.gif)
 
-Deleting Appointment
+## Deleting Appointment
 !['Deleting Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Delete.gif)
 
 ### Form Errors
