@@ -17,19 +17,19 @@ The front end of this project is built with React which also makes requests to a
 ## Screenshots
 
 
-Main View Page
+### Main View Page
 !['Main View Page'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Main%20Page.gif)
 
-Saving Appointment
+### Saving Appointment
 !['Saving Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Saving.gif)
 
 Deleting Appointment
 !['Deleting Appointment'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Delete.gif)
 
-Form Errors
+### Form Errors
 !['Form Errors'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20Form%20Errors.gif)
 
-HTTP/API Errors
+### HTTP/API Errors
 !['HTTP/API Errors'](https://github.com/Nourm9/scheduler/blob/master/docs/Scheduler%20-%20API%20Error.gif)
 
 ## Setup
