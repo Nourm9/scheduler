@@ -5,14 +5,14 @@ The front end of this project is built with React which also makes requests to a
 
 ## User Interaction and Features
 
--User can view MAIN PAGE at contains the days and appointments for each day.
--User can view available slots and filled slots.
--User can view Days and number of Spots Remaining on the main page sidebar
--User can create, update and delete each of their appointments.
--User will recieve errors if
--Student Name is not filled in form
--Interviewr is not selected in form
--HTTP response fails
+* User can view MAIN PAGE at contains the days and appointments for each day.
+* User can view available slots and filled slots.
+* User can view Days and number of Spots Remaining on the main page sidebar
+* User can create, update and delete each of their appointments.
+* User will recieve errors if
+  * Student Name is not filled in form
+  * Interviewr is not selected in form
+  * HTTP response fails
 
 ## Screenshots
 
@@ -57,22 +57,22 @@ npm run storybook
 ## Project Stack
 
 ### Front-End:
--React
--JavaScript
--Axios
--JSX
--HTML and SASS,
+* React
+* JavaScript
+* Axios
+* JSX
+* HTML and SASS,
 
-### Back-End: 
--Express 
--Node.js
--PostgreSQL
+### Back* End: 
+* Express 
+* Node.js
+* PostgreSQL
 
 ### Testing: 
--Storybook
--Webpack Dev Server
--Jest
--Testing Library and Cypress
+* Storybook
+* Webpack Dev Server
+* Jest
+* Testing Library and Cypress
 
 ## Dependencies
 
